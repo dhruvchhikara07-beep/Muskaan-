@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>For My Muskan ❤️ — From Dhruv</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #2b091c 0%, #120309 60%, #070104 100%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Star & Heart Canvas */
+    #bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Top Crest Badge */
+    .top-badge {
+      position: fixed;
+      top: 16px;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 182, 193, 0.35);
+      backdrop-filter: blur(10px);
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      color: #ffd1dc;
+      box-shadow: 0 4px 15px rgba(255, 77, 121, 0.25);
+    }
+
+    /* Main Stage Container */
+    .stage-container {
+      position: relative;
+      z-index: 10;
+      width: 92%;
+      max-width: 440px;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 35px;
+    }
+
+    /* Individual Screens */
+    .screen {
+      display: none;
+      width: 100%;
+      background: rgba(30, 8, 20, 0.82);
+      border: 1px solid rgba(255, 192, 203, 0.28);
+      border-radius: 26px;
+      padding: 28px 22px;
+      text-align: center;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 64, 129, 0.22);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Typography */
+    .script-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      color: #ff9eb5;
+      text-shadow: 0 0 15px rgba(255, 105, 145, 0.6);
+      margin-bottom: 6px;
+      line-height: 1.15;
+    }
+
+    .serif-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: #ffe4ec;
+      margin-bottom: 14px;
+    }
+
+    .sub-text {
+      font-size: 0.94rem;
+      color: #f3c6d3;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    /* Envelope Card on Screen 1 */
+    .envelope-box {
+      position: relative;
+      width: 260px;
+      height: 175px;
+      margin: 18px auto 24px;
+      background: linear-gradient(145deg, #a91d47, #6d0e2b);
+      border-radius: 16px;
+      border: 2px solid rgba(255, 215, 0, 0.45);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 64, 129, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.35s ease;
+    }
+
+    .envelope-box:active {
+      transform: scale(0.96);
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 75px;
+      background: linear-gradient(180deg, #c92a59, #8d1539);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+    }
+
+    .wax-seal {
+      position: relative;
+      z-index: 5;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ffd700, #c99700);
+      border: 2px solid #fff3b0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+      animation: pulseSeal 1.6s infinite;
+    }
+
+    @keyframes pulseSeal {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 18px rgba(255, 215, 0, 0.7); }
+      50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(255, 215, 0, 1); }
+    }
+
+    /* Primary Glowing Button */
+    .btn-primary {
+      display: inline-block;
+      width: 100%;
+      max-width: 280px;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(90deg, #ff3366, #ff6b8b, #ff3366);
+      background-size: 200% auto;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 22px rgba(255, 51, 102, 0.5);
+      transition: transform 0.2s;
+      animation: shine 3s linear infinite;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.96);
+    }
+
+    @keyframes shine {
+      to { background-position: 200% center; }
+    }
+
+    .meaning-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px dashed rgba(255, 182, 193, 0.45);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 14px 0 20px;
+      min-height: 85px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-style: italic;
+      color: #ffeaf0;
+      font-size: 0.95rem;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffd1dc;
+      border: 1px solid rgba(255, 182, 193, 0.4);
+      padding: 9px 18px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+
+    .vow-list {
+      text-align: left;
+      margin: 12px 0 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .vow-item {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 182, 193, 0.25);
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 0.88rem;
+      color: #ffdce5;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .vow-item.sealed {
+      background: rgba(255, 51, 102, 0.22);
+      border-color: #ff6b8b;
+      color: #fff;
+    }
+
+    .letter-paper {
+      background: rgba(255, 245, 248, 0.95);
+      color: #3b0d1e;
+      border-radius: 16px;
+      padding: 20px 18px;
+      text-align: left;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      margin-bottom: 20px;
+      box-shadow: inset 0 0 15px rgba(201, 42, 89, 0.15);
+    }
+
+    .signature {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.9rem;
+      color: #b51747;
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .ring-wrapper {
+      width: 125px;
+      height: 125px;
+      margin: 6px auto 14px;
+      animation: floatRing 2.5s ease-in-out infinite;
+    }
+
+    @keyframes floatRing {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .proposal-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .btn-no {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffd1dc;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .certificate-box {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 51, 102, 0.2));
+      border: 1.5px solid #ffd700;
+      border-radius: 18px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+
+    .cert-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.3rem;
+      color: #ffd700;
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+  <div class="top-badge">✨ Dhruv ❤️ Muskan • Forever Begins ✨</div>
+
+  <div class="stage-container">
+    <!-- SCREEN 1 -->
+    <div class="screen active" id="screen1">
+      <div class="script-title">For My Dearest Muskan</div>
+      <div class="serif-heading">A Special Surprise From Dhruv 💌</div>
+      <div class="envelope-box" onclick="goToScreen(2)">
+        <div class="envelope-flap"></div>
+        <div class="wax-seal">❤️</div>
+      </div>
+      <p class="sub-text">Tap the glowing heart seal or button below to open...</p>
+      <button class="btn-primary" onclick="goToScreen(2)">Open Your Surprise 💖</button>
+    </div>
+
+    <!-- SCREEN 2 -->
+    <div class="screen" id="screen2">
+      <div class="script-title">Muskan...</div>
+      <div class="serif-heading">The Most Beautiful Smile in My World ✨</div>
+      <p class="sub-text">Your name means <b>"Smile"</b>, and you light up my world every day.</p>
+      <div class="meaning-card" id="complimentBox">
+        "Muskan, one smile from you makes my entire day brighter than a thousand stars. ❤️"
+      </div>
+      <button class="btn-secondary" onclick="nextCompliment()">✨ Tap for Another Reason</button><br>
+      <button class="btn-primary" onclick="goToScreen(3)">Read My Promises 👉</button>
+    </div>
+
+    <!-- SCREEN 3 -->
+    <div class="screen" id="screen3">
+      <div class="script-title">My Vows to You</div>
+      <div class="serif-heading">Tap Each Promise to Seal It 🤞❤️</div>
+      <div class="vow-list">
+        <div class="vow-item" onclick="toggleVow(this)"><span class="vow-icon">💖</span><span>I promise to protect your <b>Muskan</b> always.</span></div>
+        <div class="vow-item" onclick="toggleVow(this)"><span class="vow-icon">🌹</span><span>I promise to always listen and stand by you.</span></div>
+        <div class="vow-item" onclick="toggleVow(this)"><span class="vow-icon">🏡</span><span>I promise to build a happy home with you.</span></div>
+        <div class="vow-item" onclick="toggleVow(this)"><span class="vow-icon">♾️</span><span>I promise to love you more every single day.</span></div>
+      </div>
+      <button class="btn-primary" onclick="goToScreen(4)">Open My Love Letter 💌</button>
+    </div>
+
+    <!-- SCREEN 4 -->
+    <div class="screen" id="screen4">
+      <div class="script-title">From My Heart</div>
+      <div class="serif-heading">A Letter Written Just For You</div>
+      <div class="letter-paper">
+        <p>My Dearest Muskan,<br><br>From being my favorite person to talking to my entire world—every moment with you is magical. I want to hold your hand through every sunrise and sunset for the rest of my life.</p>
+        <div class="signature">Yours forever, Dhruv ❤️</div>
+      </div>
+      <button class="btn-primary" onclick="goToScreen(5)">One Big Question Awaits... 💍</button>
+    </div>
+
+    <!-- SCREEN 5 -->
+    <div class="screen" id="screen5">
+      <div class="ring-wrapper">
+        <svg viewBox="0 0 120 120" width="100%" height="100%">
+          <defs>
+            <linearGradient id="goldBand" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffe066"/><stop offset="50%" stop-color="#ffd700"/><stop offset="100%" stop-color="#b8860b"/></linearGradient>
+            <linearGradient id="diamondGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="50%" stop-color="#b8f2ff"/><stop offset="100%" stop-color="#70d6ff"/></linearGradient>
+          </defs>
+          <circle cx="28" cy="24" r="2.5" fill="#fff"/><circle cx="92" cy="26" r="2" fill="#ffd700"/><circle cx="60" cy="10" r="3" fill="#fff"/>
+          <polygon points="60,18 80,34 60,56 40,34" fill="url(#diamondGrad)" stroke="#fff" stroke-width="1.5"/>
+          <polygon points="40,34 80,34 72,22 48,22" fill="#e0fbfc" opacity="0.8"/>
+          <circle cx="60" cy="78" r="28" fill="none" stroke="url(#goldBand)" stroke-width="9"/>
+        </svg>
+      </div>
+      <div class="script-title">Muskan...</div>
+      <div class="serif-heading">Will You Be My Forever & My Future Wife? 💍❤️</div>
+      <p class="sub-text">Make me the happiest man alive!</p>
+      <div class="proposal-actions">
+        <button class="btn-primary" onclick="acceptProposal()">YES, A Thousand Times YES! 💖💍</button>
+        <button class="btn-no" id="noBtn" onmouseover="dodgeNo()" onclick="dodgeNo()">No 🙈</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 6 -->
+    <div class="screen" id="screen6">
+      <div class="script-title">She Said YES! 🎉</div>
+      <div class="serif-heading">Best Day of My Life! ❤️</div>
+      <div class="certificate-box">
+        <div style="font-size: 0.78rem; color: #ffd1dc; letter-spacing: 1px;">OFFICIAL FOREVER STAMP</div>
+        <div class="cert-names">Dhruv ❤️ Muskan</div>
+        <div style="font-size: 0.88rem; color: #fff;">Future Husband & Future Wife 💍</div>
+        <div style="font-size: 0.78rem; color: #ffd700; margin-top: 6px;">Sealed with Love • October 25, 2026</div>
+      </div>
+      <p class="sub-text">I love you endlessly, meri Muskan! Tap below to send your "YES" on WhatsApp! 🥰</p>
+      <button class="btn-primary" onclick="shareWhatsApp()">Send "YES! ❤️" to Dhruv 💬</button>
+    </div>
+  </div>
+
+  <script>
+    function goToScreen(num) {
+      var screens = document.querySelectorAll('.screen');
+      for (var i = 0; i < screens.length; i++) { screens[i].classList.remove('active'); }
+      document.getElementById('screen' + num).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    var compliments = [
+      '"Muskan, one smile from you makes my entire day brighter than a thousand stars. ❤️"',
+      '"Looking into your eyes feels like coming home—you are my peace and my happiness. ✨"',
+      '"Every love song suddenly makes sense because of you, meri Muskan. 🎶💖"',
+      '"I fall in love with your laugh and your cute expressions all over again every day! 🥰"'
+    ];
+    var compIndex = 0;
+    function nextCompliment() {
+      compIndex = (compIndex + 1) % compliments.length;
+      document.getElementById('complimentBox').innerHTML = compliments[compIndex];
+    }
+
+    function toggleVow(el) { el.classList.toggle('sealed'); }
+
+    var noCount = 0;
+    function dodgeNo() {
+      var btn = document.getElementById('noBtn');
+      noCount++;
+      if (noCount >= 4) {
+        btn.innerHTML = "Of Course YES! 💖";
+        btn.style.background = "linear-gradient(90deg, #ff3366, #ff6b8b)";
+        btn.onclick = acceptProposal;
+        return;
+      }
+      var rx = (Math.random() - 0.5) * 130;
+      var ry = (Math.random() - 0.5) * 50;
+      btn.style.transform = "translate(" + rx + "px, " + ry + "px)";
+      var phrases = ["Are you sure? 🥺", "Think again cutie! 😘", "No option locked! ❤️"];
+      btn.innerHTML = phrases[noCount - 1] || "Try clicking YES! 💖";
+    }
+
+    function acceptProposal() {
+      goToScreen(6);
+      for (var i = 0; i < 40; i++) {
+        particles.push({ x: Math.random() * canvas.width, y: canvas.height + Math.random() * 50, size: Math.random() * 16 + 10, speedY: Math.random() * 2 + 1, alpha: 0.9 });
+      }
+    }
+
+    function shareWhatsApp() {
+      var text = encodeURIComponent("YES Dhruv! ❤️💍 A thousand times YES to our forever! 🥰✨");
+      window.open("https://wa.me/?text=" + text, "_blank");
+    }
+
+    var canvas = document.getElementById('bgCanvas');
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (var i = 0; i < 35; i++) {
+      particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 10 + 6, speedY: Math.random() * 0.6 + 0.3, alpha: Math.random() * 0.5 + 0.2 });
+    }
+
+    function animateBg() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        ctx.save(); ctx.globalAlpha = p.alpha; ctx.font = p.size + "px serif";
+        ctx.fillText("❤️", p.x, p.y);
+        ctx.restore();
+        p.y -= p.speedY;
+        if (p.y < -20) { p.y = canvas.height + 20; p.x = Math.random() * canvas.width; }
+      }
+      requestAnimationFrame(animateBg);
+    }
+    animateBg();
+  </script>
+</body>
+</html>
